@@ -28,7 +28,7 @@
  * Adapted for the uCrop library.
  */
 
-package com.krod.yxcrop.util;
+package com.krod.crop.util;
 
 import android.util.Log;
 

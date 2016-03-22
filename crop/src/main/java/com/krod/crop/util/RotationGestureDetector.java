@@ -1,4 +1,4 @@
-package com.krod.yxcrop.util;
+package com.krod.crop.util;
 
 import android.support.annotation.NonNull;
 import android.view.MotionEvent;

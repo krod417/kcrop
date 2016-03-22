@@ -1,4 +1,4 @@
-package com.krod.yxcrop.view;
+package com.krod.crop.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -6,17 +6,15 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 
-import com.krod.yxcrop.util.RotationGestureDetector;
-
 /**
  * Created by Oleksii Shliama (https://github.com/shliama).
  */
-public class GestureCropImageView extends CropImageView {
+public class GestureCropImageView extends com.krod.crop.view.CropImageView {
 
     private static final int DOUBLE_TAP_ZOOM_DURATION = 200;
 
     private ScaleGestureDetector mScaleDetector;
-    private RotationGestureDetector mRotateDetector;
+    private com.krod.crop.util.RotationGestureDetector mRotateDetector;
     private GestureDetector mGestureDetector;
 
     private float mMidPntX, mMidPntY;
@@ -111,7 +109,7 @@ public class GestureCropImageView extends CropImageView {
     private void setupGestureListeners() {
         mGestureDetector = new GestureDetector(getContext(), new GestureListener(), null, true);
         mScaleDetector = new ScaleGestureDetector(getContext(), new ScaleListener());
-        mRotateDetector = new RotationGestureDetector(new RotateListener());
+        mRotateDetector = new com.krod.crop.util.RotationGestureDetector(new RotateListener());
     }
 
     private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
@@ -140,10 +138,10 @@ public class GestureCropImageView extends CropImageView {
 
     }
 
-    private class RotateListener extends RotationGestureDetector.SimpleOnRotationGestureListener {
+    private class RotateListener extends com.krod.crop.util.RotationGestureDetector.SimpleOnRotationGestureListener {
 
         @Override
-        public boolean onRotation(RotationGestureDetector rotationDetector) {
+        public boolean onRotation(com.krod.crop.util.RotationGestureDetector rotationDetector) {
             postRotate(rotationDetector.getAngle(), mMidPntX, mMidPntY);
             return true;
         }

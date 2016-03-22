@@ -1,4 +1,4 @@
-package com.krod.yxcrop.sample;
+package com.krod.crop.sample;
 
 import android.Manifest;
 import android.app.NotificationManager;
@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 
 import java.io.File;
 import java.io.FileInputStream;

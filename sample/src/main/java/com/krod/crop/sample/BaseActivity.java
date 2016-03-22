@@ -1,4 +1,4 @@
-package com.krod.yxcrop.sample;
+package com.krod.crop.sample;
 
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;

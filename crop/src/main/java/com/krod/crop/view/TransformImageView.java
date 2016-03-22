@@ -1,4 +1,4 @@
-package com.krod.yxcrop.view;
+package com.krod.crop.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -16,10 +16,6 @@ import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 import android.widget.ImageView;
-
-import com.krod.yxcrop.util.BitmapLoadUtils;
-import com.krod.yxcrop.util.FastBitmapDrawable;
-import com.krod.yxcrop.util.RectUtils;
 
 /**
  * Created by Oleksii Shliama (https://github.com/shliama).
@@ -115,7 +111,7 @@ public class TransformImageView extends ImageView {
 
     @Override
     public void setImageBitmap(final Bitmap bitmap) {
-        setImageDrawable(new FastBitmapDrawable(bitmap));
+        setImageDrawable(new com.krod.crop.util.FastBitmapDrawable(bitmap));
     }
 
     @Nullable
@@ -132,8 +128,8 @@ public class TransformImageView extends ImageView {
     public void setImageUri(@NonNull Uri imageUri) throws Exception {
         mImageUri = imageUri;
         int maxBitmapSize = calculateMaxBitmapSize();
-        BitmapLoadUtils.decodeBitmapInBackground(getContext(), imageUri, maxBitmapSize, maxBitmapSize,
-                new BitmapLoadUtils.BitmapLoadCallback() {
+        com.krod.crop.util.BitmapLoadUtils.decodeBitmapInBackground(getContext(), imageUri, maxBitmapSize, maxBitmapSize,
+                new com.krod.crop.util.BitmapLoadUtils.BitmapLoadCallback() {
                     @Override
                     public void onBitmapLoaded(@NonNull final Bitmap bitmap) {
                         mBitmapWasLoaded = true;
@@ -297,8 +293,8 @@ public class TransformImageView extends ImageView {
         Log.d(TAG, String.format("Image size: [%d:%d]", (int) w, (int) h));
 
         RectF initialImageRect = new RectF(0, 0, w, h);
-        mInitialImageCorners = RectUtils.getCornersFromRect(initialImageRect);
-        mInitialImageCenter = RectUtils.getCenterFromRect(initialImageRect);
+        mInitialImageCorners = com.krod.crop.util.RectUtils.getCornersFromRect(initialImageRect);
+        mInitialImageCenter = com.krod.crop.util.RectUtils.getCenterFromRect(initialImageRect);
 
         if (mTransformImageListener != null) {
             mTransformImageListener.onLoadComplete();

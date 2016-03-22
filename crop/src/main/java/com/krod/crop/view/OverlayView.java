@@ -1,4 +1,4 @@
-package com.krod.yxcrop.view;
+package com.krod.crop.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -13,7 +13,7 @@ import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.krod.yxcrop.R;
+import com.krod.crop.R;
 
 /**
  * Created by jian.wj

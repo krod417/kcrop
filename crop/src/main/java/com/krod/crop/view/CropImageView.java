@@ -1,4 +1,4 @@
-package com.krod.yxcrop.view;
+package com.krod.crop.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -10,9 +10,7 @@ import android.support.annotation.IntRange;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 
-import com.krod.yxcrop.R;
-import com.krod.yxcrop.util.CubicEasing;
-import com.krod.yxcrop.util.RectUtils;
+import com.krod.crop.R;
 
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
@@ -23,7 +21,7 @@ import java.util.Arrays;
  * This class adds crop feature, methods to draw crop guidelines, and keep image in correct state.
  * Also it extends parent class methods to add checks for scale; animating zoom in/out.
  */
-public class CropImageView extends TransformImageView {
+public class CropImageView extends com.krod.crop.view.TransformImageView {
 
     public static final int DEFAULT_IMAGE_TO_CROP_BOUNDS_ANIM_DURATION = 500;
     public static final float DEFAULT_MAX_SCALE_MULTIPLIER = 10.0f;
@@ -227,7 +225,7 @@ public class CropImageView extends TransformImageView {
                 mTempMatrix.setRotate(getCurrentAngle());
                 mTempMatrix.mapRect(tempCropRect);
 
-                final float[] currentImageSides = RectUtils.getRectSidesFromCorners(mCurrentImageCorners);
+                final float[] currentImageSides = com.krod.crop.util.RectUtils.getRectSidesFromCorners(mCurrentImageCorners);
 
                 deltaScale = Math.max(tempCropRect.width() / currentImageSides[0],
                         tempCropRect.height() / currentImageSides[1]);
@@ -255,13 +253,13 @@ public class CropImageView extends TransformImageView {
         mTempMatrix.setRotate(-getCurrentAngle());
 
         float[] unrotatedImageCorners = Arrays.copyOf(mCurrentImageCorners, mCurrentImageCorners.length);
-        float[] unrotatedCropBoundsCorners = RectUtils.getCornersFromRect(mCropRect);
+        float[] unrotatedCropBoundsCorners = com.krod.crop.util.RectUtils.getCornersFromRect(mCropRect);
 
         mTempMatrix.mapPoints(unrotatedImageCorners);
         mTempMatrix.mapPoints(unrotatedCropBoundsCorners);
 
-        RectF unrotatedImageRect = RectUtils.trapToRect(unrotatedImageCorners);
-        RectF unrotatedCropRect = RectUtils.trapToRect(unrotatedCropBoundsCorners);
+        RectF unrotatedImageRect = com.krod.crop.util.RectUtils.trapToRect(unrotatedImageCorners);
+        RectF unrotatedCropRect = com.krod.crop.util.RectUtils.trapToRect(unrotatedCropBoundsCorners);
 
         float deltaLeft = unrotatedImageRect.left - unrotatedCropRect.left;
         float deltaTop = unrotatedImageRect.top - unrotatedCropRect.top;
@@ -325,10 +323,10 @@ public class CropImageView extends TransformImageView {
         float[] unrotatedImageCorners = Arrays.copyOf(imageCorners, imageCorners.length);
         mTempMatrix.mapPoints(unrotatedImageCorners);
 
-        float[] unrotatedCropBoundsCorners = RectUtils.getCornersFromRect(mCropRect);
+        float[] unrotatedCropBoundsCorners = com.krod.crop.util.RectUtils.getCornersFromRect(mCropRect);
         mTempMatrix.mapPoints(unrotatedCropBoundsCorners);
 
-        return RectUtils.trapToRect(unrotatedImageCorners).contains(RectUtils.trapToRect(unrotatedCropBoundsCorners));
+        return com.krod.crop.util.RectUtils.trapToRect(unrotatedImageCorners).contains(com.krod.crop.util.RectUtils.trapToRect(unrotatedCropBoundsCorners));
     }
 
     /**
@@ -435,9 +433,9 @@ public class CropImageView extends TransformImageView {
             long now = System.currentTimeMillis();
             float currentMs = Math.min(mDurationMs, now - mStartTime);
 
-            float newX = CubicEasing.easeOut(currentMs, 0, mCenterDiffX, mDurationMs);
-            float newY = CubicEasing.easeOut(currentMs, 0, mCenterDiffY, mDurationMs);
-            float newScale = CubicEasing.easeInOut(currentMs, 0, mDeltaScale, mDurationMs);
+            float newX = com.krod.crop.util.CubicEasing.easeOut(currentMs, 0, mCenterDiffX, mDurationMs);
+            float newY = com.krod.crop.util.CubicEasing.easeOut(currentMs, 0, mCenterDiffY, mDurationMs);
+            float newScale = com.krod.crop.util.CubicEasing.easeInOut(currentMs, 0, mDeltaScale, mDurationMs);
 
             if (currentMs < mDurationMs) {
                 cropImageView.postTranslate(newX - (cropImageView.mCurrentImageCenter[0] - mOldX), newY - (cropImageView.mCurrentImageCenter[1] - mOldY));//该语句标示滑动图片是否可以脱离边界
@@ -492,7 +490,7 @@ public class CropImageView extends TransformImageView {
 
             long now = System.currentTimeMillis();
             float currentMs = Math.min(mDurationMs, now - mStartTime);
-            float newScale = CubicEasing.easeInOut(currentMs, 0, mDeltaScale, mDurationMs);
+            float newScale = com.krod.crop.util.CubicEasing.easeInOut(currentMs, 0, mDeltaScale, mDurationMs);
 
             if (currentMs < mDurationMs) {
                 cropImageView.zoomInImage(mOldScale + newScale, mDestX, mDestY);

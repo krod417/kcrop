@@ -1,4 +1,4 @@
-package com.krod.yxcrop;
+package com.krod.crop;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -169,12 +169,12 @@ public class UCrop {
     }
 
     /**
-     * Get Intent to start {@link CropActivity}
+     * Get Intent to start {@link com.krod.crop.CropActivity}
      *
-     * @return Intent for {@link CropActivity}
+     * @return Intent for {@link com.krod.crop.CropActivity}
      */
     public Intent getIntent(@NonNull Context context) {
-        mCropIntent.setClass(context, CropActivity.class);
+        mCropIntent.setClass(context, com.krod.crop.CropActivity.class);
         mCropIntent.putExtras(mCropOptionsBundle);
         return mCropIntent;
     }

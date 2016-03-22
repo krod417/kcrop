@@ -42,13 +42,13 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <com.krod.yxcrop.view.GestureCropImageView
+        <com.krod.crop.view.GestureCropImageView
             android:id="@+id/image_view_crop"
             android:layout_centerInParent="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
-        <com.krod.yxcrop.view.OverlayView
+        <com.krod.crop.view.OverlayView
             android:layout_centerInParent="true"
             android:id="@+id/view_overlay"
             android:layout_width="match_parent"

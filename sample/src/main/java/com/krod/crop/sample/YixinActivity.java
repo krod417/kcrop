@@ -1,4 +1,4 @@
-package com.krod.yxcrop.sample;
+package com.krod.crop.sample;
 
 import android.Manifest;
 import android.content.Intent;
@@ -14,8 +14,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.krod.yxcrop.UCrop;
-
+import com.krod.crop.UCrop;
 import java.io.File;
 
 /**

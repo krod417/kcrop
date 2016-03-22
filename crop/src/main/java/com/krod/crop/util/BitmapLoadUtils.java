@@ -1,4 +1,4 @@
-package com.krod.yxcrop.util;
+package com.krod.crop.util;
 
 import android.content.Context;
 import android.graphics.Bitmap;

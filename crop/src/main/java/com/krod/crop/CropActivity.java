@@ -1,4 +1,4 @@
-package com.krod.yxcrop;
+package com.krod.crop;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,10 +13,8 @@ import android.view.View;
 import android.view.Window;
 import android.widget.LinearLayout;
 
-import com.krod.yxcrop.util.BitmapLoadUtils;
-import com.krod.yxcrop.view.CropImageView;
-import com.krod.yxcrop.view.GestureCropImageView;
-import com.krod.yxcrop.view.OverlayView;
+import com.krod.crop.util.BitmapLoadUtils;
+import com.krod.crop.view.CropImageView;
 
 import java.io.OutputStream;
 
@@ -29,8 +27,8 @@ public class CropActivity extends AppCompatActivity{
     private static final String TAG = "CropActivity";
     public static final int DEFAULT_COMPRESS_QUALITY = 90;
     public static final Bitmap.CompressFormat DEFAULT_COMPRESS_FORMAT = Bitmap.CompressFormat.JPEG;
-    GestureCropImageView mGestureCropImageView;
-    OverlayView mOverlayView;
+    com.krod.crop.view.GestureCropImageView mGestureCropImageView;
+    com.krod.crop.view.OverlayView mOverlayView;
     LinearLayout llMain;
 
     private Uri mOutputUri;
@@ -42,8 +40,8 @@ public class CropActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.ucrop_activity_crop);
-        mGestureCropImageView = (GestureCropImageView) findViewById(R.id.image_view_crop);
-        mOverlayView = (OverlayView) findViewById(R.id.view_overlay);
+        mGestureCropImageView = (com.krod.crop.view.GestureCropImageView) findViewById(R.id.image_view_crop);
+        mOverlayView = (com.krod.crop.view.OverlayView) findViewById(R.id.view_overlay);
         llMain = (LinearLayout) findViewById(R.id.llMain);
         findViewById(R.id.tvSave).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +58,7 @@ public class CropActivity extends AppCompatActivity{
      * This method extracts all data from the incoming intent and setups views properly.
      */
     private void setImageData(@NonNull Intent intent) {
-        llMain.setBackgroundColor(intent.getIntExtra(UCrop.EXTRA_BACKGROUND_COLOR, Color.WHITE));
+        llMain.setBackgroundColor(intent.getIntExtra(com.krod.crop.UCrop.EXTRA_BACKGROUND_COLOR, Color.WHITE));
         mGestureCropImageView.setIsEnableWrap(intent.getBooleanExtra(UCrop.EXTRA_WRAPENABLE, true));
         mOverlayView.setIsShowFrame(intent.getBooleanExtra(UCrop.EXTRA_SHOWFRAME, false));
         mOverlayView.setFrameColor(intent.getIntExtra(UCrop.EXTRA_FRAMECOLOR, Color.WHITE));
