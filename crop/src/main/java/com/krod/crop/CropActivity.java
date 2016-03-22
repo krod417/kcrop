@@ -39,7 +39,7 @@ public class CropActivity extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.ucrop_activity_crop);
+        setContentView(R.layout.kcrop_activity_crop);
         mGestureCropImageView = (com.krod.crop.view.GestureCropImageView) findViewById(R.id.image_view_crop);
         mOverlayView = (com.krod.crop.view.OverlayView) findViewById(R.id.view_overlay);
         llMain = (LinearLayout) findViewById(R.id.llMain);
@@ -58,15 +58,15 @@ public class CropActivity extends AppCompatActivity{
      * This method extracts all data from the incoming intent and setups views properly.
      */
     private void setImageData(@NonNull Intent intent) {
-        llMain.setBackgroundColor(intent.getIntExtra(com.krod.crop.UCrop.EXTRA_BACKGROUND_COLOR, Color.WHITE));
-        mGestureCropImageView.setIsEnableWrap(intent.getBooleanExtra(UCrop.EXTRA_WRAPENABLE, true));
-        mOverlayView.setIsShowFrame(intent.getBooleanExtra(UCrop.EXTRA_SHOWFRAME, false));
-        mOverlayView.setFrameColor(intent.getIntExtra(UCrop.EXTRA_FRAMECOLOR, Color.WHITE));
-        Uri inputUri = intent.getParcelableExtra(UCrop.EXTRA_INPUT_URI);
-        mOutputUri = intent.getParcelableExtra(UCrop.EXTRA_OUTPUT_URI);
+        llMain.setBackgroundColor(intent.getIntExtra(KCrop.EXTRA_BACKGROUND_COLOR, Color.WHITE));
+        mGestureCropImageView.setIsEnableWrap(intent.getBooleanExtra(KCrop.EXTRA_WRAPENABLE, true));
+        mOverlayView.setIsShowFrame(intent.getBooleanExtra(KCrop.EXTRA_SHOWFRAME, false));
+        mOverlayView.setFrameColor(intent.getIntExtra(KCrop.EXTRA_FRAMECOLOR, Color.WHITE));
+        Uri inputUri = intent.getParcelableExtra(KCrop.EXTRA_INPUT_URI);
+        mOutputUri = intent.getParcelableExtra(KCrop.EXTRA_OUTPUT_URI);
         processOptions();
-        int maxSizeX = intent.getIntExtra(UCrop.EXTRA_MAX_SIZE_X, 0);
-        int maxSizeY = intent.getIntExtra(UCrop.EXTRA_MAX_SIZE_Y, 0);
+        int maxSizeX = intent.getIntExtra(KCrop.EXTRA_MAX_SIZE_X, 0);
+        int maxSizeY = intent.getIntExtra(KCrop.EXTRA_MAX_SIZE_Y, 0);
 
         if (maxSizeX > 0 && maxSizeY > 0) {
             mGestureCropImageView.setMaxResultImageSizeX(maxSizeX);
@@ -84,7 +84,7 @@ public class CropActivity extends AppCompatActivity{
                 finish();
             }
         } else {
-            setResultException(new NullPointerException(getString(R.string.ucrop_error_input_data_is_absent)));
+            setResultException(new NullPointerException(getString(R.string.kcrop_error_input_data_is_absent)));
             finish();
         }
 
@@ -122,11 +122,11 @@ public class CropActivity extends AppCompatActivity{
 
     private void setResultUri(Uri uri) {
         setResult(RESULT_OK, new Intent()
-                .putExtra(UCrop.EXTRA_OUTPUT_URI, uri));
+                .putExtra(KCrop.EXTRA_OUTPUT_URI, uri));
     }
 
     private void setResultException(Throwable throwable) {
-        setResult(UCrop.RESULT_ERROR, new Intent().putExtra(UCrop.EXTRA_ERROR, throwable));
+        setResult(KCrop.RESULT_ERROR, new Intent().putExtra(KCrop.EXTRA_ERROR, throwable));
     }
 
 }

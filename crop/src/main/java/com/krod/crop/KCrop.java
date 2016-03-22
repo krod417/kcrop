@@ -18,7 +18,7 @@ import android.support.annotation.Nullable;
  * <p/>
  * Builder class to ease Intent setup.
  */
-public class UCrop {
+public class KCrop {
 
     public static final int REQUEST_CROP = 69;
     public static final int RESULT_ERROR = 96;
@@ -47,11 +47,11 @@ public class UCrop {
      * @param source      Uri for image to crop
      * @param destination Uri for saving the cropped image
      */
-    public static UCrop of(@NonNull Uri source, @NonNull Uri destination) {
-        return new UCrop(source, destination);
+    public static KCrop of(@NonNull Uri source, @NonNull Uri destination) {
+        return new KCrop(source, destination);
     }
 
-    private UCrop(@NonNull Uri source, @NonNull Uri destination) {
+    private KCrop(@NonNull Uri source, @NonNull Uri destination) {
         mCropIntent = new Intent();
         mCropOptionsBundle = new Bundle();
         mCropOptionsBundle.putParcelable(EXTRA_INPUT_URI, source);
@@ -64,7 +64,7 @@ public class UCrop {
      * @param width  max cropped image width
      * @param height max cropped image height
      */
-    public UCrop withMaxResultSize(@IntRange(from = 100) int width, @IntRange(from = 100) int height) {
+    public KCrop withMaxResultSize(@IntRange(from = 100) int width, @IntRange(from = 100) int height) {
         mCropOptionsBundle.putInt(EXTRA_MAX_SIZE_X, width);
         mCropOptionsBundle.putInt(EXTRA_MAX_SIZE_Y, height);
         return this;
@@ -75,7 +75,7 @@ public class UCrop {
      * @param color
      * @return
      */
-    public UCrop setBackgroundColor(@IntRange(from = Color.WHITE)int color) {
+    public KCrop setBackgroundColor(@IntRange(from = Color.WHITE)int color) {
         mCropOptionsBundle.putInt(EXTRA_BACKGROUND_COLOR, color);
         return this;
     }
@@ -85,7 +85,7 @@ public class UCrop {
      * @param wrapenable
      * @return
      */
-    public UCrop setWrapenable(boolean wrapenable) {
+    public KCrop setWrapenable(boolean wrapenable) {
         mCropOptionsBundle.putBoolean(EXTRA_WRAPENABLE, wrapenable);
         return this;
     }
@@ -95,7 +95,7 @@ public class UCrop {
      * @param isShowFrame
      * @return
      */
-    public UCrop setShowFrame(boolean isShowFrame) {
+    public KCrop setShowFrame(boolean isShowFrame) {
         mCropOptionsBundle.putBoolean(EXTRA_SHOWFRAME, isShowFrame);
         return this;
     }
@@ -105,7 +105,7 @@ public class UCrop {
      * @param color
      * @return
      */
-    public UCrop setFrameColor(@IntRange(from = Color.WHITE)int color) {
+    public KCrop setFrameColor(@IntRange(from = Color.WHITE)int color) {
         mCropOptionsBundle.putInt(EXTRA_FRAMECOLOR, color);
         return this;
     }

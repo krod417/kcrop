@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="CropImageView">
+    <declare-styleable name="kcrop_CropImageView">
 
-    <attr name="wrapEnable" format="boolean"></attr>
+    <attr name="kcrop_wrapEnable" format="boolean"></attr>
     </declare-styleable>
-    <declare-styleable name="OverlayView">
-        <attr name="frameColor" format="color|reference"></attr>
-        <attr name="showFrame" format="boolean"></attr>
+    <declare-styleable name="kcrop_OverlayView">
+        <attr name="kcrop_frameColor" format="color|reference"></attr>
+        <attr name="kcrop_showFrame" format="boolean"></attr>
     </declare-styleable>
 </resources>

@@ -50,9 +50,9 @@ public class CropImageView extends com.krod.crop.view.TransformImageView {
 
     public CropImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.CropImageView);
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.kcrop_CropImageView);
         if (ta != null && ta.length() > 0) {
-            isEnableWrap = ta.getBoolean(R.styleable.CropImageView_wrapEnable, true);
+            isEnableWrap = ta.getBoolean(R.styleable.kcrop_CropImageView_kcrop_wrapEnable, true);
             ta.recycle();
         }
     }

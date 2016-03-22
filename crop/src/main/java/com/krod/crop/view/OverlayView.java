@@ -41,10 +41,10 @@ public class OverlayView extends View {
     public OverlayView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.OverlayView);
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.kcrop_OverlayView);
         if (ta != null && ta.length() > 0) {
-            isShowFrame = ta.getBoolean(R.styleable.OverlayView_showFrame, true);
-            frameColor = ta.getColor(R.styleable.OverlayView_frameColor, Color.WHITE);
+            isShowFrame = ta.getBoolean(R.styleable.kcrop_OverlayView_kcrop_showFrame, true);
+            frameColor = ta.getColor(R.styleable.kcrop_OverlayView_kcrop_frameColor, Color.WHITE);
             ta.recycle();
         }
     }
