@@ -51,7 +51,22 @@
                 android:layout_gravity="center"
                 android:text="@string/label_max_cropped_image_size"
                 android:textAppearance="?android:textAppearanceSmall"/>
-
+            <CheckBox
+                android:id="@+id/cbWrapEnable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="选即易信版，不选即微信版"
+                android:layout_gravity="center_horizontal"
+                android:checked="true"
+                />
+            <CheckBox
+                android:id="@+id/cbShowFrame"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="是否显示边框"
+                android:checked="false"
+                android:layout_gravity="center_horizontal"
+                />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

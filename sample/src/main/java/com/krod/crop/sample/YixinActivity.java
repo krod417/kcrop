@@ -11,10 +11,12 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.krod.crop.KCrop;
+
 import java.io.File;
 
 /**
@@ -26,6 +28,7 @@ public class YixinActivity extends BaseActivity {
     private final static String TAG = "YixinActivity";
     private static final int REQUEST_SELECT_PICTURE = 0x01;
     private EditText etResultWidth, etResultHeight;
+    private CheckBox cbShowFrame, cbWrapEnable;
     private static final String SAMPLE_CROPPED_IMAGE_NAME = "SampleCropImage.jpeg";
     private Uri destinationUri;
     @Override
@@ -35,6 +38,8 @@ public class YixinActivity extends BaseActivity {
         destinationUri = Uri.fromFile(new File(getCacheDir(), SAMPLE_CROPPED_IMAGE_NAME));
         etResultWidth = (EditText) findViewById(R.id.etResultWidth);
         etResultHeight = (EditText) findViewById(R.id.etResultHeight);
+        cbShowFrame = (CheckBox) findViewById(R.id.cbShowFrame);
+        cbWrapEnable = (CheckBox) findViewById(R.id.cbWrapEnable);
         findViewById(R.id.button_crop).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,10 +97,17 @@ public class YixinActivity extends BaseActivity {
         }
         uCrop.setBackgroundColor(Color.WHITE);
         //以下属性可以配置出微信版头像截取
-//        uCrop.setBackgroundColor(Color.parseColor("#000000"));
-//        uCrop.setWrapenable(false);
-//        uCrop.setShowFrame(true);
-//        uCrop.setFrameColor(Color.WHITE);
+
+        boolean wrapEnable = cbWrapEnable.isChecked();
+        boolean showFrame = cbShowFrame.isChecked();
+        uCrop.setWrapenable(wrapEnable);
+        if (!wrapEnable) {
+            uCrop.setBackgroundColor(Color.parseColor("#000000"));
+            uCrop.setShowFrame(showFrame);
+            if (showFrame) {
+                uCrop.setFrameColor(Color.WHITE);
+            }
+        }
         uCrop.start(YixinActivity.this);
     }
 
