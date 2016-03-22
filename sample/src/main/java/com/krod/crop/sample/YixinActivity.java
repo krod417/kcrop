@@ -85,30 +85,30 @@ public class YixinActivity extends BaseActivity {
     }
 
     private void startCropActivity(@NonNull Uri uri) {
-        KCrop uCrop = KCrop.of(uri, destinationUri);
+        KCrop kCrop = KCrop.of(uri, destinationUri);
         try {
             int resultWidth = Integer.valueOf(etResultWidth.getText().toString().trim());
             int resultHeight = Integer.valueOf(etResultHeight.getText().toString().trim());
             if (resultWidth > 0 && resultHeight > 0) {
-                uCrop = uCrop.withMaxResultSize(resultWidth, resultHeight);
+                kCrop = kCrop.withMaxResultSize(resultWidth, resultHeight);
             }
         } catch (NumberFormatException e) {
             Log.e(TAG, "Number please", e);
         }
-        uCrop.setBackgroundColor(Color.WHITE);
+        kCrop.setBackgroundColor(Color.WHITE);
         //以下属性可以配置出微信版头像截取
 
         boolean wrapEnable = cbWrapEnable.isChecked();
         boolean showFrame = cbShowFrame.isChecked();
-        uCrop.setWrapenable(wrapEnable);
+        kCrop.setWrapenable(wrapEnable);
         if (!wrapEnable) {
-            uCrop.setBackgroundColor(Color.parseColor("#000000"));
-            uCrop.setShowFrame(showFrame);
+            kCrop.setBackgroundColor(Color.parseColor("#000000"));
+            kCrop.setShowFrame(showFrame);
             if (showFrame) {
-                uCrop.setFrameColor(Color.WHITE);
+                kCrop.setFrameColor(Color.WHITE);
             }
         }
-        uCrop.start(YixinActivity.this);
+        kCrop.start(YixinActivity.this);
     }
 
     private void handleCropResult(@NonNull Intent result) {
