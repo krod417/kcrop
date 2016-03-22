@@ -14,7 +14,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.krod.crop.UCrop;
+import com.krod.crop.KCrop;
 import java.io.File;
 
 /**
@@ -70,17 +70,17 @@ public class YixinActivity extends BaseActivity {
                 } else {
                     Toast.makeText(YixinActivity.this, R.string.toast_cannot_retrieve_selected_image, Toast.LENGTH_SHORT).show();
                 }
-            } else if (requestCode == UCrop.REQUEST_CROP) {
+            } else if (requestCode == KCrop.REQUEST_CROP) {
                 handleCropResult(data);
             }
         }
-        if (resultCode == UCrop.RESULT_ERROR) {
+        if (resultCode == KCrop.RESULT_ERROR) {
             handleCropError(data);
         }
     }
 
     private void startCropActivity(@NonNull Uri uri) {
-        UCrop uCrop = UCrop.of(uri, destinationUri);
+        KCrop uCrop = KCrop.of(uri, destinationUri);
         try {
             int resultWidth = Integer.valueOf(etResultWidth.getText().toString().trim());
             int resultHeight = Integer.valueOf(etResultHeight.getText().toString().trim());
@@ -91,6 +91,7 @@ public class YixinActivity extends BaseActivity {
             Log.e(TAG, "Number please", e);
         }
         uCrop.setBackgroundColor(Color.WHITE);
+        //以下属性可以配置出微信版头像截取
 //        uCrop.setBackgroundColor(Color.parseColor("#000000"));
 //        uCrop.setWrapenable(false);
 //        uCrop.setShowFrame(true);
@@ -99,7 +100,7 @@ public class YixinActivity extends BaseActivity {
     }
 
     private void handleCropResult(@NonNull Intent result) {
-        final Uri resultUri = UCrop.getOutput(result);
+        final Uri resultUri = KCrop.getOutput(result);
         if (resultUri != null) {
             ResultActivity.startWithUri(YixinActivity.this, resultUri);
         } else {
@@ -109,7 +110,7 @@ public class YixinActivity extends BaseActivity {
 
     @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
     private void handleCropError(@NonNull Intent result) {
-        final Throwable cropError = UCrop.getError(result);
+        final Throwable cropError = KCrop.getError(result);
         if (cropError != null) {
             Log.e(TAG, "handleCropError: ", cropError);
             Toast.makeText(YixinActivity.this, cropError.getMessage(), Toast.LENGTH_LONG).show();
