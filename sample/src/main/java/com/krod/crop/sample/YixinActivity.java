@@ -103,10 +103,10 @@ public class YixinActivity extends BaseActivity {
         kCrop.setWrapenable(wrapEnable);
         if (!wrapEnable) {
             kCrop.setBackgroundColor(Color.parseColor("#000000"));
-            kCrop.setShowFrame(showFrame);
-            if (showFrame) {
-                kCrop.setFrameColor(Color.WHITE);
-            }
+        }
+        kCrop.setShowFrame(showFrame);
+        if (showFrame) {
+            kCrop.setFrameColor(Color.WHITE);
         }
         kCrop.start(YixinActivity.this);
     }
