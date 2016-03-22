@@ -1,1 +1,1 @@
-include ':yxcrop', ':sample'
+include ':crop', ':sample'
