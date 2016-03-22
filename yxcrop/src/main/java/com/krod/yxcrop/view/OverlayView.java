@@ -1,6 +1,7 @@
 package com.krod.yxcrop.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -11,6 +12,8 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.krod.yxcrop.R;
 
 /**
  * Created by jian.wj
@@ -23,6 +26,10 @@ public class OverlayView extends View {
     private final RectF mCropViewRect = new RectF();
     //protected int mThisWidth, mThisHeight;
     private float cropWidth, cropHeight;
+    private boolean isShowFrame = false;
+
+    private int frameColor = Color.WHITE;
+
     public OverlayView(Context context) {
         this(context, null);
     }
@@ -34,11 +41,25 @@ public class OverlayView extends View {
     public OverlayView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.OverlayView);
+        if (ta != null && ta.length() > 0) {
+            isShowFrame = ta.getBoolean(R.styleable.OverlayView_showFrame, true);
+            frameColor = ta.getColor(R.styleable.OverlayView_frameColor, Color.WHITE);
+            ta.recycle();
+        }
     }
 
     public void setCropWidthAndHeight(float cropWidth, float cropHeight) {
         this.cropHeight = cropHeight / 2;
         this.cropWidth = cropWidth / 2;
+    }
+
+    public void setIsShowFrame(boolean isShowFrame) {
+        this.isShowFrame = isShowFrame;
+    }
+
+    public void setFrameColor(int frameColor) {
+        this.frameColor = frameColor;
     }
 
     /**
@@ -91,7 +112,12 @@ public class OverlayView extends View {
         canvas.clipRect(mCropViewRect, Region.Op.DIFFERENCE);
         p.setColor(Color.parseColor("#bb000000"));
         canvas.drawRect(0, 0, getWidth(), getHeight(), p);
-
+        if (isShowFrame) {
+            p.setColor(frameColor);
+            p.setStrokeWidth(2);
+            p.setStyle(Paint.Style.STROKE);
+            canvas.drawRect(mCropViewRect, p);
+        }
     }
 
 

@@ -1,6 +1,7 @@
 package com.krod.yxcrop.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.RectF;
@@ -9,6 +10,7 @@ import android.support.annotation.IntRange;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 
+import com.krod.yxcrop.R;
 import com.krod.yxcrop.util.CubicEasing;
 import com.krod.yxcrop.util.RectUtils;
 
@@ -38,7 +40,7 @@ public class CropImageView extends TransformImageView {
     private long mImageToWrapCropBoundsAnimDuration = DEFAULT_IMAGE_TO_CROP_BOUNDS_ANIM_DURATION;
     private float mDiffX = 0f, mDiffY = 0f;
     private boolean isScaleIng = false;
-
+    private boolean isEnableWrap = true;
 
     public CropImageView(Context context) {
         this(context, null);
@@ -50,6 +52,15 @@ public class CropImageView extends TransformImageView {
 
     public CropImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.CropImageView);
+        if (ta != null && ta.length() > 0) {
+            isEnableWrap = ta.getBoolean(R.styleable.CropImageView_wrapEnable, true);
+            ta.recycle();
+        }
+    }
+
+    public void setIsEnableWrap(boolean isEnableWrap) {
+        this.isEnableWrap = isEnableWrap;
     }
 
     /**
@@ -169,10 +180,6 @@ public class CropImageView extends TransformImageView {
         removeCallbacks(mZoomImageToPositionRunnable);
     }
 
-    public void setImageToWrapCropBounds() {
-        setImageToWrapCropBounds(true);
-    }
-
     /**
      * If image doesn't fill the crop bounds it must be translated and scaled properly to fill those.
      * <p/>
@@ -181,8 +188,8 @@ public class CropImageView extends TransformImageView {
      * Scale value must be calculated only if image won't fill the crop bounds after it's translated to the
      * crop bounds rectangle center. Using temporary variables this method checks this case.
      */
-    public void setImageToWrapCropBounds(boolean animate) {
-        if (!isImageWrapCropBounds() && !isScaleIng) {
+    public void setImageToWrapCropBounds() {
+        if (isEnableWrap && !isImageWrapCropBounds() && !isScaleIng) {
 
             float currentX = mCurrentImageCenter[0];
             float currentY = mCurrentImageCenter[1];
@@ -229,16 +236,9 @@ public class CropImageView extends TransformImageView {
                 deltaScale = deltaScale * currentScale - currentScale;
             }
 
-            if (animate) {
-                post(mWrapCropBoundsRunnable = new WrapCropBoundsRunnable(
-                        CropImageView.this, mImageToWrapCropBoundsAnimDuration, currentX, currentY, deltaX, deltaY,
-                        currentScale, deltaScale, willImageWrapCropBoundsAfterTranslate));
-            } else {
-                postTranslate(deltaX, deltaY);
-                if (!willImageWrapCropBoundsAfterTranslate) {
-                    zoomInImage(currentScale + deltaScale, mCropRect.centerX(), mCropRect.centerY());
-                }
-            }
+            post(mWrapCropBoundsRunnable = new WrapCropBoundsRunnable(
+                    CropImageView.this, mImageToWrapCropBoundsAnimDuration, currentX, currentY, deltaX, deltaY,
+                    currentScale, deltaScale, willImageWrapCropBoundsAfterTranslate));
         }
     }
 

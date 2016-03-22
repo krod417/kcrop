@@ -131,8 +131,8 @@ public class TransformImageView extends ImageView {
      */
     public void setImageUri(@NonNull Uri imageUri) throws Exception {
         mImageUri = imageUri;
-
-        BitmapLoadUtils.decodeBitmapInBackground(getContext(), imageUri, mMaxResultImageSizeX, mMaxResultImageSizeY,
+        int maxBitmapSize = calculateMaxBitmapSize();
+        BitmapLoadUtils.decodeBitmapInBackground(getContext(), imageUri, maxBitmapSize, maxBitmapSize,
                 new BitmapLoadUtils.BitmapLoadCallback() {
                     @Override
                     public void onBitmapLoaded(@NonNull final Bitmap bitmap) {

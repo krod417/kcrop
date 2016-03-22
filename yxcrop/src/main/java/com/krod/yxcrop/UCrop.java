@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,6 +31,12 @@ public class UCrop {
 
     public static final String EXTRA_MAX_SIZE_X = EXTRA_PREFIX + ".MaxSizeX";
     public static final String EXTRA_MAX_SIZE_Y = EXTRA_PREFIX + ".MaxSizeY";
+
+    public static final String EXTRA_BACKGROUND_COLOR = EXTRA_PREFIX + ".backgroundcolor";
+    public static final String EXTRA_WRAPENABLE = EXTRA_PREFIX + ".wrapenable";
+
+    public static final String EXTRA_SHOWFRAME = EXTRA_PREFIX + ".showframe";
+    public static final String EXTRA_FRAMECOLOR = EXTRA_PREFIX + ".framecolor";
 
     private Intent mCropIntent;
     private Bundle mCropOptionsBundle;
@@ -63,6 +70,45 @@ public class UCrop {
         return this;
     }
 
+    /**
+     * 设置背景颜色
+     * @param color
+     * @return
+     */
+    public UCrop setBackgroundColor(@IntRange(from = Color.WHITE)int color) {
+        mCropOptionsBundle.putInt(EXTRA_BACKGROUND_COLOR, color);
+        return this;
+    }
+
+    /**
+     * 是否开启还原模式（开启即易信版，否则微信版）
+     * @param wrapenable
+     * @return
+     */
+    public UCrop setWrapenable(boolean wrapenable) {
+        mCropOptionsBundle.putBoolean(EXTRA_WRAPENABLE, wrapenable);
+        return this;
+    }
+
+    /**
+     * 是否显示边框
+     * @param isShowFrame
+     * @return
+     */
+    public UCrop setShowFrame(boolean isShowFrame) {
+        mCropOptionsBundle.putBoolean(EXTRA_SHOWFRAME, isShowFrame);
+        return this;
+    }
+
+    /**
+     * 边框的颜色
+     * @param color
+     * @return
+     */
+    public UCrop setFrameColor(@IntRange(from = Color.WHITE)int color) {
+        mCropOptionsBundle.putInt(EXTRA_FRAMECOLOR, color);
+        return this;
+    }
 
     /**
      * Send the crop Intent from an Activity
