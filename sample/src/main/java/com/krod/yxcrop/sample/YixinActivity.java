@@ -3,6 +3,7 @@ package com.krod.yxcrop.sample;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -90,7 +91,11 @@ public class YixinActivity extends BaseActivity {
         } catch (NumberFormatException e) {
             Log.e(TAG, "Number please", e);
         }
-
+        uCrop.setBackgroundColor(Color.WHITE);
+//        uCrop.setBackgroundColor(Color.parseColor("#000000"));
+//        uCrop.setWrapenable(false);
+//        uCrop.setShowFrame(true);
+//        uCrop.setFrameColor(Color.WHITE);
         uCrop.start(YixinActivity.this);
     }
 
